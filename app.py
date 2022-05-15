@@ -16,7 +16,7 @@ def main():
     # title
     html_temp = """
     <div>
-    <h1 style="color:MEDIUMSEAGREEN;text-align:left;"> My Crop Recommendation System 🌱 </h1>
+    <h1 style="color:MEDIUMSEAGREEN;text-align:left;"> 🌾 My Crop Recommendation System 🌾 </h1>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -35,7 +35,7 @@ def main():
 
 
     with col2:
-        st.subheader(" Find out the most suitable crop to grow in your farm 👨‍🌾")
+        st.subheader(" 👨‍🌾 Find out the most suitable crop to grow in your farm 👨‍🌾")
         N = st.number_input("Nitrogen", 1,10000)
         P = st.number_input("Phosporus", 1,10000)
         K = st.number_input("Potassium", 1,10000)
@@ -49,7 +49,7 @@ def main():
         
         if st.button('Predict'):
 
-            loaded_model = load_model('XGBoost.pkl')
+            loaded_model = load_model('model.pkl')
             prediction = loaded_model.predict(single_pred)
             col1.write('''
 		    ## Results 🔍 
@@ -57,7 +57,7 @@ def main():
             col1.success(f"{prediction.item().title()} are recommended by the A.I for your farm.")
       #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
 
-    st.warning("Note: This A.I application is for educational/demo purposes only and cannot be relied upon. Check the source code [here](https://github.com/gabbygab1233/Crop-Recommendation)")
+    st.warning("Note: This module included in our system is used in the context of my PFE. Made by Hajar Lachheb")
     hide_menu_style = """
     <style>
     #MainMenu {visibility: hidden;}
