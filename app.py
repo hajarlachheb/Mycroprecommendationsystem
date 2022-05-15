@@ -21,7 +21,7 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    col1,col2  = st.beta_columns([2,2])
+    col1,col2  = st.beta_columns([3,3])
     
     with col1: 
         with st.beta_expander(" ℹ️ Information", expanded=True):
