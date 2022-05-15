@@ -54,8 +54,7 @@ def main():
             col1.write('''
 		    ## Results 🔍 
 		    ''')
-            col1.success(f"{prediction.item().title()} are recommended by the A.I for your farm.")
-      #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
+            col1.success(f"{prediction.item().title()} are recommended by our system for your farm.")
 
     st.warning("Note: This module included in our system is used in the context of my PFE. Made by Hajar Lachheb")
     hide_menu_style = """
