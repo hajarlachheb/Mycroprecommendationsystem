@@ -46,47 +46,12 @@ warnings.filterwarnings('ignore')
 sns.set_style("whitegrid", {'axes.grid' : False})
 pio.templates.default = "plotly_white"
 
-
-
-################################################################################
-#                                                                              #
-#                            Analyze Data                                      #
-#                                                                              #
-################################################################################
-def explore_data(df):
-    print("Number of Instances and Attributes:", df.shape)
-    print('\n')
-    print('Dataset columns:',df.columns)
-    print('\n')
-    print('Data types of each columns: ', df.info())
-################################################################################
-#                                                                              #
-#                      Checking for Duplicates                                 #
-#                                                                              #
-################################################################################
-def checking_removing_duplicates(df):
-    count_dups = df.duplicated().sum()
-    print("Number of Duplicates: ", count_dups)
-    if count_dups >= 1:
-        df.drop_duplicates(inplace=True)
-        print('Duplicate values removed!')
-    else:
-        print('No Duplicate values')
-################################################################################
-#                                                                              #
-#                Split Data to Training and Validation set                     #
-#                                                                              #
-################################################################################
 def read_in_and_split_data(data, target):
     X = data.drop(target, axis=1)
     y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=0)
     return X_train, X_test, y_train, y_test
-################################################################################
-#                                                                              #
-#                        Spot-Check Algorithms                                 #
-#                                                                              #
-################################################################################
+
 def GetModel():
     Models = []
     Models.append(('LR'   , LogisticRegression()))
@@ -105,11 +70,7 @@ def ensemblemodels():
     ensembles.append(( 'Bagging' , BaggingClassifier()))
     ensembles.append(('ET', ExtraTreesClassifier()))
     return ensembles
-################################################################################
-#                                                                              #
-#                 Spot-Check Normalized Models                                 #
-#                                                                              #
-################################################################################
+
 def NormalizedModel(nameOfScaler):
     
     if nameOfScaler == 'standard':
@@ -134,11 +95,7 @@ def NormalizedModel(nameOfScaler):
     pipelines.append((nameOfScaler+'ET'  , Pipeline([('Scaler', scaler),('ET'  , ExtraTreesClassifier())])  ))
 
     return pipelines
-################################################################################
-#                                                                              #
-#                           Train Model                                        #
-#                                                                              #
-################################################################################
+
 def fit_model(X_train, y_train,models):
     # Test options and evaluation metric
     num_folds = 10
@@ -155,18 +112,10 @@ def fit_model(X_train, y_train,models):
         print(msg)
         
     return names, results
-################################################################################
-#                                                                              #
-#                          Save Trained Model                                  #
-#                                                                              #
-################################################################################
+
 def save_model(model,filename):
     pickle.dump(model, open(filename, 'wb'))
-################################################################################
-#                                                                              #
-#                          Performance Measure                                 #
-#                                                                              #
-################################################################################
+
 def classification_metrics(model, conf_matrix):
     print(f"Training Accuracy Score: {model.score(X_train, y_train) * 100:.1f}%")
     print(f"Validation Accuracy Score: {model.score(X_test, y_test) * 100:.1f}%")
